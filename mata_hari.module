@@ -10,9 +10,24 @@
  * 
  */
 function mata_hari_menu() {
-    
+    $items['admin/config/mata_hari_info'] = array(
+        'title' => 'Mata Hari',
+        'page callback' => 'mata_hari_info_callback',
+        'access arguments' => array('view mata_hari_info'),
+    );
 }
 
+/**
+ * Implements hook_permission().
+ */
+function mata_hari_permission() {
+  $permissions = array(
+    'view mata_hari_info' => array(
+      'title' => t('View Informaton'),
+    ),
+  );
+  return $permissions;
+}
 /**
  * Implements hook_entity_info
  * @return array
@@ -27,7 +42,7 @@ function mata_hari_entity_info() {
             'id' => 'id', // The 'id' (basic_id here) is the unique id.
         ),
         'static cache' => TRUE,
-        );
+    );
 
     return $info;
 }
