@@ -8,7 +8,7 @@
 function mata_hari_info_callback() {
     $render = array();
     $render[] = __mata_hari_info_table();
-    
+    $render[] = drupal_get_form('mata_hari_info_callback_form');
     return $render;
 }
 
@@ -45,4 +45,15 @@ function __mata_hari_info_table() {
     );
 
     return $build;
+}
+
+
+function mata_hari_info_callback_form($form, &$form_state){
+    
+}
+function mata_hari_info_callback_form_validate($form, &$form_state){
+    
+}
+function mata_hari_info_callback_form_submit($form, &$form_state){
+    
 }
