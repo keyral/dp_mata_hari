@@ -46,5 +46,3 @@ function mata_hari_node_update($node){
             );
             __mat_hari_save($info);
 }
-
-hook_
