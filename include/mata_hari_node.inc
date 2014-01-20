@@ -16,7 +16,7 @@ function mata_hari_node_delete($vars){
     $info->user = $user->name;
     $info->date = time();
     $info->action = t('Delete');
-    $info->comment = t('Delete to node, nid: @nid, title: @title',
+    $info->description = t('Delete to node, nid: @nid, title: @title',
             array('@nid' => $vars->vid, '@title' => $vars->title)
             );
             __mat_hari_save($info);

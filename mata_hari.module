@@ -77,7 +77,7 @@ function __mata_hari_query_all() {
  * 
  */
 function __mat_hari_save($info) {
-    if (is_object($info)) {
-        $save = new stdClass();
-    }
+    if (isset($info) && is_object($info)) {
+        entity_save('mata_hari_info', $info);
+        }
 }
