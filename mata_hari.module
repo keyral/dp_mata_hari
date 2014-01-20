@@ -4,7 +4,7 @@
  * @file
  * Use to module mata_hari
  */
-
+require_once ('include/mata_hari_node.inc');
 /**
  * Implements hook_menu()
  * 
@@ -70,4 +70,12 @@ function __mata_hari_query_all() {
         $resutls = entity_load('mata_hari_info', array_keys($result['mata_hari_info']));
     }
     return $resutls;
+}
+
+/**
+ * 
+ */
+function __mat_hari_save($user){
+    
+    $save = new stdClass();
 }
