@@ -65,7 +65,7 @@ function __mata_hari_query_all() {
     $resutls = '';
     $query = new EntityFieldQuery();
     $query->entityCondition('entity_type', 'mata_hari_info')
-            ->propertyOrderBy('date', 'ASC');
+            ->propertyOrderBy('date', 'DESC');
     $result = $query->execute();
     if (isset($result['mata_hari_info'])) {
         $resutls = entity_load('mata_hari_info', array_keys($result['mata_hari_info']));
@@ -78,6 +78,10 @@ function __mata_hari_query_all() {
  */
 function __mat_hari_save($info) {
     if (isset($info) && is_object($info)) {
-        entity_save('mata_hari_info', $info);
+        try {
+         entity_save('mata_hari_info', $info);   
+        } catch (Exception $ex) {
+            watchdog('error',$ex );   
+        }
         }
 }

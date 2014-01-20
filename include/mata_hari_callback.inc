@@ -27,9 +27,10 @@ function __mata_hari_info_table() {
     $results = __mata_hari_query_all();
     if (isset($results)) {
         foreach ($results as $result) {
+            $user = user_load($result->user);
             $data['id'] = $result->id;
-            $data['date'] = $result->date;
-            $data['user'] = $result->user;
+            $data['date'] = format_date($result->date,'date_format_short');
+            $data['user'] = l($user->name,'user/' . $user->uid);
             $data['action'] = $result->action;
             $data['description'] = $result->description;
             $rows[] = array('data' => $data);
