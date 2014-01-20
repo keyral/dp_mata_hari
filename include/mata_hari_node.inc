@@ -1,6 +1,13 @@
 <?php
 
-
+/**
+ *  Implements hook_node_delete
+ * 
+ * @global object $user
+ * @param object $vars
+ * 
+ * Return info to save mata hari.
+ */
 function mata_hari_node_delete($vars){
     global $user;
     
@@ -8,10 +15,9 @@ function mata_hari_node_delete($vars){
     $info = new stdClass();
     $info->user = $user->name;
     $info->date = time();
+    $info->action = t('Delete');
     $info->comment = t('Delete to node, nid: @nid, title: @title',
             array('@nid' => $vars->vid, '@title' => $vars->title)
             );
-    
-    var_dump($info);
-    exit();
+            __mat_hari_save($info);
 }

@@ -5,6 +5,7 @@
  * Use to module mata_hari
  */
 require_once ('include/mata_hari_node.inc');
+
 /**
  * Implements hook_menu()
  * 
@@ -44,7 +45,7 @@ function mata_hari_entity_info() {
         'fieldable' => TRUE,
         'entity keys' => array(
             'id' => 'id', // id ( unique id )
-            'date' => 'date', 
+            'date' => 'date',
             'user' => 'user',
             'action' => 'action',
             'description' => 'description',
@@ -75,7 +76,8 @@ function __mata_hari_query_all() {
 /**
  * 
  */
-function __mat_hari_save($user){
-    
-    $save = new stdClass();
+function __mat_hari_save($info) {
+    if (is_object($info)) {
+        $save = new stdClass();
+    }
 }
