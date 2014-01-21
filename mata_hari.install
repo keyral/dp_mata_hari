@@ -39,6 +39,12 @@ function mata_hari_schema() {
             ),
             'user' => array(
                 'description' => 'User include content',
+                'type' => 'init',
+                'not null' => TRUE,
+                'default' => 0,
+            ),
+            'category' => array(
+                'description' => 'Category of log',
                 'type' => 'text',
                 'size' => 'medium',
                 'not null' => TRUE

@@ -5,6 +5,8 @@
  * Use to module mata_hari
  */
 require_once ('include/mata_hari_node.inc');
+require_once ('include/mata_hari_taxonomy.inc');
+require_once ('include/mata_hari_user.inc');
 
 /**
  * Implements hook_menu()
@@ -47,6 +49,7 @@ function mata_hari_entity_info() {
             'id' => 'id', // id ( unique id )
             'date' => 'date',
             'user' => 'user',
+            'category' => 'category',
             'action' => 'action',
             'description' => 'description',
         ),
@@ -74,14 +77,18 @@ function __mata_hari_query_all() {
 }
 
 /**
+ * Add function __mat_hari_save()
  * 
+ * @param object $info
+ * 
+ * Save object to entity.
  */
 function __mat_hari_save($info) {
     if (isset($info) && is_object($info)) {
         try {
-         entity_save('mata_hari_info', $info);   
+            entity_save('mata_hari_info', $info);
         } catch (Exception $ex) {
-            watchdog('error',$ex );   
+            watchdog('error', $ex);
         }
-        }
+    }
 }

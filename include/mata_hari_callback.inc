@@ -18,6 +18,7 @@ function __mata_hari_info_table() {
         array('data' => t('id')),
         array('data' => t('date')),
         array('data' => t('user')),
+        array('category' => t('category')),
         array('data' => t('action')),
         array('data' => t('comment')),
     );
@@ -31,6 +32,7 @@ function __mata_hari_info_table() {
             $data['id'] = $result->id;
             $data['date'] = format_date($result->date,'date_format_short');
             $data['user'] = l($user->name,'user/' . $user->uid);
+            $date['category'] = $result->category;
             $data['action'] = $result->action;
             $data['description'] = $result->description;
             $rows[] = array('data' => $data);
