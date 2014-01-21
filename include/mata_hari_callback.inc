@@ -13,50 +13,50 @@ function mata_hari_info_callback() {
 }
 
 function __mata_hari_info_table() {
-    $items = __mata_hari_query_all();
-    $header = array(
-        array('data' => t('id')),
-        array('data' => t('date')),
-        array('data' => t('user')),
-        array('category' => t('category')),
-        array('data' => t('action')),
-        array('data' => t('comment')),
-    );
+        $header = array(
+            array('data' => t('id')),
+            array('data' => t('date')),
+            array('data' => t('user')),
+            array('data' => t('category')),
+            array('data' => t('action')),
+            array('data' => t('comment')),
+        );
 
 
-    $rows = array();
-    $results = __mata_hari_query_all();
-    if (isset($results)) {
-        foreach ($results as $result) {
-            $user = user_load($result->user);
-            $data['id'] = $result->id;
-            $data['date'] = format_date($result->date,'date_format_short');
-            $data['user'] = l($user->name,'user/' . $user->uid);
-            $date['category'] = $result->category;
-            $data['action'] = $result->action;
-            $data['description'] = $result->description;
-            $rows[] = array('data' => $data);
+        $rows = array();
+        $results = __mata_hari_query_all();
+        if (isset($results) && $results != NULL) {
+            foreach ($results as $result) {
+                $user = user_load($result->user);
+                $data['id'] = $result->id;
+                $data['date'] = format_date($result->date, 'date_format_short');
+                $data['user'] = l($user->name, 'user/' . $user->uid);
+                $data['category'] = $result->category;
+                $data['action'] = $result->action;
+                $data['description'] = $result->description;
+                $rows[] = array('data' => $data);
+            }
         }
+
+
+        // build the table for the nice output.
+        $build['tablesort_table'] = array(
+            '#theme' => 'table',
+            '#header' => $header,
+            '#rows' => $rows,
+        );
+
+        return $build;
     }
 
-
-    // build the table for the nice output.
-    $build['tablesort_table'] = array(
-        '#theme' => 'table',
-        '#header' => $header,
-        '#rows' => $rows,
-    );
-
-    return $build;
-}
-
-
-function mata_hari_info_callback_form($form, &$form_state){
+function mata_hari_info_callback_form($form, &$form_state) {
     
 }
-function mata_hari_info_callback_form_validate($form, &$form_state){
+
+function mata_hari_info_callback_form_validate($form, &$form_state) {
     
 }
-function mata_hari_info_callback_form_submit($form, &$form_state){
+
+function mata_hari_info_callback_form_submit($form, &$form_state) {
     
 }

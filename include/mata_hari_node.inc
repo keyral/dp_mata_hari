@@ -14,6 +14,7 @@ function mata_hari_node_delete($node){
     $info = new stdClass();
     $info->user = $user->uid;
     $info->date = time();
+    $info->category = 'Node';
     $info->action = t('Delete');
     $info->description = t('Delete to node, nid: @nid, title: @title',
             array('@nid' => $node->vid, '@title' => $node->title)
@@ -27,6 +28,7 @@ function mata_hari_node_insert($node){
     $info = new stdClass();
     $info->user = $node->uid;
     $info->date = $node->created;
+    $info->category = 'Node';
     $info->action = t('Add');
     $info->description = t('Add to node, title: @title',
             array('@title' => $node->title)
@@ -40,6 +42,7 @@ function mata_hari_node_update($node){
     $info = new stdClass();
     $info->user = $user->uid;
     $info->date = time();
+    $info->category = 'Node';
     $info->action = t('Update');
     $info->description = t('Delete to node, nid: @nid, title: @title',
             array('@nid' => $node->vid, '@title' => $node->title)

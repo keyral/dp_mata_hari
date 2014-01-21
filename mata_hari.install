@@ -39,7 +39,7 @@ function mata_hari_schema() {
             ),
             'user' => array(
                 'description' => 'User include content',
-                'type' => 'init',
+                'type' => 'int',
                 'not null' => TRUE,
                 'default' => 0,
             ),

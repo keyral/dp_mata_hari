@@ -8,6 +8,7 @@ function mata_hari_user_insert($edit, $account, $category) {
     $info = new stdClass();
     $info->user = $node->uid;
     $info->date = $node->created;
+    $info->category = 'User';
     $info->action = t('Add');
     $info->description = t('Add to user, title: @title', array('@title' => $node->title)
     );
