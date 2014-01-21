@@ -7,7 +7,9 @@
 require_once ('include/mata_hari_node.inc');
 require_once ('include/mata_hari_taxonomy.inc');
 require_once ('include/mata_hari_user.inc');
-
+require_once ('include/mata_hari_field.inc');
+require_once ('include/mata_hari_menu.inc');
+require_once ('include/mata_hari_field.inc');
 /**
  * Implements hook_menu()
  * 
