@@ -1,8 +1,5 @@
 <?php
 
-/*
-  hook_field_create_field($field);
- */
 
 function mata_hari_field_create_field($field) {
     global $user;
