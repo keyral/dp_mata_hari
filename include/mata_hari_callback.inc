@@ -24,10 +24,8 @@ function __mata_hari_info_table() {
 
 
         $rows = array();
-        $results = new mata_hari_query();
-        $results->queryAll;
-        var_dump($results);
-        exit('cool');
+        $query = new mata_hari_query();
+        $results = $query->queryAll();
         if (isset($results) && $results != NULL) {
             foreach ($results as $result) {
                 $user = user_load($result->user);

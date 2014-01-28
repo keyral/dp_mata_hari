@@ -1,6 +1,6 @@
 <?php
 
-class mata_hari_query {
+class mata_hari_query extends EntityFieldQuery {
 
     /**
      * 
@@ -15,7 +15,7 @@ class mata_hari_query {
         if (isset($result['mata_hari_info'])) {
             $resutls = entity_load('mata_hari_info', array_keys($result['mata_hari_info']));
         }
-        echo $resutls;
+        return $resutls;
     }
 
     public function deleteAll() {
