@@ -10,6 +10,7 @@ require_once ('include/mata_hari_user.inc');
 require_once ('include/mata_hari_field.inc');
 require_once ('include/mata_hari_menu.inc');
 require_once ('include/mata_hari_field.inc');
+require_once ('classes/mata_hari.log.php');
 /**
  * Implements hook_menu()
  * 
@@ -93,4 +94,14 @@ function __mat_hari_save($info) {
             watchdog('error', $ex);
         }
     }
+}
+
+
+
+function mata_hari_init(){
+    $log = new mata_hari_log();
+    $log->log('cool');
+    var_dump($log);
+    exit('die');
+    
 }
