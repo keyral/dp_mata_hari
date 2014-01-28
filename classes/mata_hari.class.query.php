@@ -1,16 +1,25 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+class mata_hari_query {
 
-/**
- * Description of mata_hari
- *
- * @author keyral
- */
-class mata_hari {
-    //put your code here
+    /**
+     * 
+     * @return array
+     */
+    public function queryAll() {
+        $resutls = '';
+        $query = new EntityFieldQuery();
+        $query->entityCondition('entity_type', 'mata_hari_info');
+        $query->propertyOrderBy('date', 'DESC');
+        $result = $query->execute();
+        if (isset($result['mata_hari_info'])) {
+            $resutls = entity_load('mata_hari_info', array_keys($result['mata_hari_info']));
+        }
+        echo $resutls;
+    }
+
+    public function deleteAll() {
+        entity_delete_multiple('mata_hari_info', $this->queryAll());
+    }
+
 }
