@@ -3,8 +3,11 @@
 class mata_hari_query extends EntityFieldQuery {
 
     /**
+     * Add function queryAll()
      * 
      * @return array
+     * 
+     * to query all entity.
      */
     public function queryAll() {
         $resutls = '';
@@ -18,6 +21,11 @@ class mata_hari_query extends EntityFieldQuery {
         return $resutls;
     }
 
+    /**
+     * Add function deleteAll()
+     * 
+     * To delete all entity.
+     */
     public function deleteAll() {
         entity_delete_multiple('mata_hari_info', $this->queryAll());
     }

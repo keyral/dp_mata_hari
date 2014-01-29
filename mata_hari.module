@@ -65,22 +65,6 @@ function mata_hari_entity_info() {
     return $info;
 }
 
-/**
- * Add function __mata_hari_query_all
- * 
- * @return array
- */
-function __mata_hari_query_all() {
-    $resutls = '';
-    $query = new EntityFieldQuery();
-    $query->entityCondition('entity_type', 'mata_hari_info')
-            ->propertyOrderBy('date', 'DESC');
-    $result = $query->execute();
-    if (isset($result['mata_hari_info'])) {
-        $resutls = entity_load('mata_hari_info', array_keys($result['mata_hari_info']));
-    }
-    return $resutls;
-}
 
 /**
  * Add function __mat_hari_save()

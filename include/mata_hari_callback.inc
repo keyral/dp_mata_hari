@@ -13,51 +13,62 @@ function mata_hari_info_callback() {
 }
 
 function __mata_hari_info_table() {
-        $header = array(
-            array('data' => t('id')),
-            array('data' => t('date')),
-            array('data' => t('user')),
-            array('data' => t('category')),
-            array('data' => t('action')),
-            array('data' => t('comment')),
-        );
+    $header = array(
+        array('data' => t('id')),
+        array('data' => t('date')),
+        array('data' => t('user')),
+        array('data' => t('category')),
+        array('data' => t('action')),
+        array('data' => t('comment')),
+    );
 
 
-        $rows = array();
-        $query = new mata_hari_query();
-        $results = $query->queryAll();
-        if (isset($results) && $results != NULL) {
-            foreach ($results as $result) {
-                $user = user_load($result->user);
-                $data['id'] = $result->id;
-                $data['date'] = format_date($result->date, 'date_format_short');
-                $data['user'] = l($user->name, 'user/' . $user->uid);
-                $data['category'] = $result->category;
-                $data['action'] = $result->action;
-                $data['description'] = $result->description;
-                $rows[] = array('data' => $data);
-            }
+    $rows = array();
+    $query = new mata_hari_query();
+    $results = $query->queryAll();
+    if (isset($results) && $results != NULL) {
+        foreach ($results as $result) {
+            $user = user_load($result->user);
+            $data['id'] = $result->id;
+            $data['date'] = format_date($result->date, 'date_format_short');
+            $data['user'] = l($user->name, 'user/' . $user->uid);
+            $data['category'] = $result->category;
+            $data['action'] = $result->action;
+            $data['description'] = $result->description;
+            $rows[] = array('data' => $data);
         }
-
-
-        // build the table for the nice output.
-        $build['tablesort_table'] = array(
-            '#theme' => 'table',
-            '#header' => $header,
-            '#rows' => $rows,
-        );
-
-        return $build;
     }
 
-function mata_hari_info_callback_form($form, &$form_state) {
-    
+    $build['box'] = array(
+        '#type' => 'markup',
+        '#prefix' => '<div id="box-message">',
+        '#suffix' => '</div>',
+        '#markup' => ' ',
+    );
+    // build the table for the nice output.
+    $build['tablesort_table'] = array(
+        '#theme' => 'table',
+        '#header' => $header,
+        '#rows' => $rows,
+    );
+    $build['submit'] = array(
+        '#type' => 'submit',
+        '#ajax' => array(
+            'callback' => 'mata_hari_callback_delete',
+            'wrapper' => 'box',
+        ),
+        '#value' => t('Envoyer '),
+    );
+    return $build;
 }
 
-function mata_hari_info_callback_form_validate($form, &$form_state) {
-    
-}
-
-function mata_hari_info_callback_form_submit($form, &$form_state) {
-    
+function mata_hari_callback_delete() {
+    try {
+        $delete = new mata_hari_query();
+        $delete->deleteAll();
+        drupal_set_message(t('All entity delete.'));
+    } catch (Exception $exc) {
+        drupal_set_message('Error to delete all entity', 'error');
+        watchdog('error', $exc->getTraceAsString());
+    }
 }
