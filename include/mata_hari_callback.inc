@@ -39,30 +39,31 @@ function __mata_hari_info_table() {
         }
     }
 
-    $build['box'] = array(
-        '#type' => 'markup',
-        '#prefix' => '<div id="box-message">',
-        '#suffix' => '</div>',
-        '#markup' => ' ',
-    );
     // build the table for the nice output.
     $build['tablesort_table'] = array(
         '#theme' => 'table',
         '#header' => $header,
         '#rows' => $rows,
     );
-    $build['submit'] = array(
-        '#type' => 'submit',
-        '#ajax' => array(
-            'callback' => 'mata_hari_callback_delete',
-            'wrapper' => 'box',
-        ),
-        '#value' => t('Envoyer '),
-    );
     return $build;
 }
 
-function mata_hari_callback_delete() {
+function mata_hari_info_callback_form($form, &$form_state) {
+    $form = array();
+    $form['box'] = array(
+        '#type' => 'markup',
+        '#prefix' => '<div id="box-message">',
+        '#suffix' => '</div>',
+        '#markup' => ' ',
+    );
+    $form['submit'] = array(
+        '#type' => 'submit',
+        '#value' => t('Envoyer '),
+    );
+    return $form;
+}
+
+function mata_hari_info_callback_form_submit($form, &$form_state) {
     try {
         $delete = new mata_hari_query();
         $delete->deleteAll();

@@ -27,7 +27,7 @@ class mata_hari_query extends EntityFieldQuery {
      * To delete all entity.
      */
     public function deleteAll() {
-        entity_delete_multiple('mata_hari_info', $this->queryAll());
+        entity_delete_multiple('mata_hari_info', array_keys($this->queryAll()));
     }
 
 }
