@@ -35,7 +35,7 @@ function mata_hari_menu() {
 function mata_hari_permission() {
     $permissions = array(
         'view mata_hari_info' => array(
-            'title' => t('View Informaton'),
+            'title' => t('View Informaton to mata hari.'),
         ),
     );
     return $permissions;
