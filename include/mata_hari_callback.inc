@@ -50,18 +50,13 @@ function __mata_hari_info_table() {
 
 function mata_hari_info_callback_form($form, &$form_state) {
     $form = array();
-    $form['box'] = array(
-        '#type' => 'markup',
-        '#prefix' => '<div id="box-message">',
-        '#suffix' => '</div>',
-        '#markup' => ' ',
-    );
-    $form['submit'] = array(
+    $form ['submit'] = array(
         '#type' => 'submit',
-        '#value' => t('Envoyer '),
+        '#value' => t('Delete all information'),
     );
     return $form;
 }
+
 
 function mata_hari_info_callback_form_submit($form, &$form_state) {
     try {
