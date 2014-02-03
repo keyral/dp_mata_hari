@@ -3,7 +3,7 @@ description = Récupere et centralise toute informations pour envoyer un rapport
 ;package = 
 dependencies[] = entity
 version = 1.0
-core = 7.x
+core = 7.x 
 ;configure = admin/content/book/settings
 
 
