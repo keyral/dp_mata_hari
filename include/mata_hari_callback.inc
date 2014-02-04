@@ -65,7 +65,7 @@ function mata_hari_info_callback_form_submit($form, &$form_state) {
         drupal_set_message(t('All entity delete.'));
         }
         else {
-            drupal_set_message(t('Entity not in database, delete impossible.'));
+            drupal_set_message(t('Entity not in database, delete impossible.', 'error'));
         }
     } catch (Exception $exc) {
         drupal_set_message('Error to delete all entity', 'error');
