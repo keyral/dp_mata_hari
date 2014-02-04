@@ -61,8 +61,12 @@ function mata_hari_info_callback_form($form, &$form_state) {
 function mata_hari_info_callback_form_submit($form, &$form_state) {
     try {
         $delete = new mata_hari_query();
-        $delete->deleteAll();
+        if($delete->deleteAll()){
         drupal_set_message(t('All entity delete.'));
+        }
+        else {
+            drupal_set_message(t('Entity not in database, delete impossible.'));
+        }
     } catch (Exception $exc) {
         drupal_set_message('Error to delete all entity', 'error');
         watchdog('error', $exc->getTraceAsString());

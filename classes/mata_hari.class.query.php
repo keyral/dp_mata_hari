@@ -22,12 +22,31 @@ class mata_hari_query extends EntityFieldQuery {
     }
 
     /**
+     * Add function to verification to delete entity.
+     * @return boolean
+     */
+    public function predelete() {
+        $return = FALSE;
+        $query = new EntityFieldQuery();
+        $query->entityCondition('entity_type', 'mata_hari_info');
+        $result = $query->execute();
+        if (isset($result['mata_hari_info'])) {
+            $return = TRUE;
+        }
+        return $return;
+    }
+
+    /**
      * Add function deleteAll()
      * 
      * To delete all entity.
      */
     public function deleteAll() {
-        entity_delete_multiple('mata_hari_info', array_keys($this->queryAll()));
+        if ($this->predelete() == TRUE) {
+            entity_delete_multiple('mata_hari_info', array_keys($this->queryAll()));
+            return TRUE;
+        } else {
+            return FALSE;
+        }
     }
-
 }
