@@ -23,10 +23,16 @@ require_once ('hook/mata_hari_field.inc');
 function mata_hari_menu() {
     $items = array();
     $items['admin/config/mata_hari_info'] = array(
-        'title' => 'Mata Hari',
+        'title' => 'Mata Hari - Home',
+        'page callback' => 'mata_hari_info_callback_home',
+        'access arguments' => array('view mata_hari_info'),
+        'file' => 'include/mata_hari_callback_home.inc',
+    );
+    $items['admin/config/mata_hari_info/log'] = array(
+        'title' => 'Mata Hari - Log',
         'page callback' => 'mata_hari_info_callback',
         'access arguments' => array('view mata_hari_info'),
-        'file' => 'include/mata_hari_callback.inc',
+        'file' => 'include/mata_hari_callback_log.inc',
     );
     return $items;
 }
@@ -56,7 +62,7 @@ function mata_hari_entity_info() {
         'base table' => 'mata_hari_info',
         'fieldable' => TRUE,
         'entity keys' => array(
-            'id' => 'id', 
+            'id' => 'id',
             'date' => 'date',
             'user' => 'user',
             'category' => 'category',

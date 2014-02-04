@@ -16,9 +16,16 @@ function mata_hari_install() {
  * Implements hook_uninstall().
  */
 function mata_hari_uninstall() {
-    
+    drupal_uninstall_schema('metat_hari');
 }
 
+/**
+ * Implements hook_schema
+ * 
+ * @return array
+ * 
+ * for save to entity in db
+ */
 function mata_hari_schema() {
     $schema = array();
 

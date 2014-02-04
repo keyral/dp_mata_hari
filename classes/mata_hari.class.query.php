@@ -49,4 +49,10 @@ class mata_hari_query extends EntityFieldQuery {
             return FALSE;
         }
     }
+
+    public function distinctTypeCategory() {
+        $query = db_query('SELECT DISTINCT category from {mata_hari_info}')->fetchCol();
+        return $query;
+    }
+
 }
