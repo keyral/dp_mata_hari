@@ -11,10 +11,20 @@ class mata_hari_query extends EntityFieldQuery {
      */
     public function queryAll() {
         $resutls = '';
-        $query = new EntityFieldQuery();
-        $query->entityCondition('entity_type', 'mata_hari_info');
-        $query->propertyOrderBy('date', 'DESC');
-        $result = $query->execute();
+        $this->entityCondition('entity_type', 'mata_hari_info');
+        $this->propertyOrderBy('date', 'DESC');
+        $result = $this->execute();
+        if (isset($result['mata_hari_info'])) {
+            $resutls = entity_load('mata_hari_info', array_keys($result['mata_hari_info']));
+        }
+        return $resutls;
+    }
+
+    public function queryByType($type) {
+        $resutls = 'rien';
+        $this->entityCondition('entity_type', 'mata_hari_info');
+        $this->propertyConditions('category', $type, '=');
+        $result = $this->execute();
         if (isset($result['mata_hari_info'])) {
             $resutls = entity_load('mata_hari_info', array_keys($result['mata_hari_info']));
         }
@@ -27,9 +37,8 @@ class mata_hari_query extends EntityFieldQuery {
      */
     public function predelete() {
         $return = FALSE;
-        $query = new EntityFieldQuery();
-        $query->entityCondition('entity_type', 'mata_hari_info');
-        $result = $query->execute();
+        $this->entityCondition('entity_type', 'mata_hari_info');
+        $result = $this->execute();
         if (isset($result['mata_hari_info'])) {
             $return = TRUE;
         }
