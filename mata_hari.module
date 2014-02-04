@@ -56,7 +56,7 @@ function mata_hari_entity_info() {
         'base table' => 'mata_hari_info',
         'fieldable' => TRUE,
         'entity keys' => array(
-            'id' => 'id', // id ( unique id )
+            'id' => 'id', 
             'date' => 'date',
             'user' => 'user',
             'category' => 'category',
@@ -67,22 +67,4 @@ function mata_hari_entity_info() {
     );
 
     return $info;
-}
-
-
-/**
- * Add function __mat_hari_save()
- * 
- * @param object $info
- * 
- * Save object to entity.
- */
-function __mat_hari_save($info) {
-    if (isset($info) && is_object($info)) {
-        try {
-            entity_save('mata_hari_info', $info);
-        } catch (Exception $ex) {
-            watchdog('error', $ex);
-        }
-    }
 }
