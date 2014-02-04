@@ -3,49 +3,34 @@
 /**
  *  Implements hook_node_delete
  * 
- * @global object $user
  * @param object $vars
  * 
  * Return info to save mata hari.
  */
-function mata_hari_node_delete($node){
-    global $user;
-    // Construction de l'objet info.
-    $info = new stdClass();
-    $info->user = $user->uid;
-    $info->date = time();
-    $info->category = 'Node';
-    $info->action = t('Delete');
-    $info->description = t('Delete to node, nid: @nid, title: @title',
-            array('@nid' => $node->vid, '@title' => $node->title)
-            );
-            __mat_hari_save($info);
+function mata_hari_node_delete($node) {
+    $log = new mata_hari_log(t('Node'), t('Delete'));
+    $log->set_message(t('Delete to node, nid: @nid, title: @title', array('@nid' => $node->nid, '@title' => $node->title)));
+    $log->save();
 }
 
-function mata_hari_node_insert($node){
-    global $user;
-    // Construction de l'objet info.
-    $info = new stdClass();
-    $info->user = $node->uid;
-    $info->date = $node->created;
-    $info->category = 'Node';
-    $info->action = t('Add');
-    $info->description = t('Add to node, title: @title',
-            array('@title' => $node->title)
-            );
-            __mat_hari_save($info);
+/**
+ * Implementes hook_node_insert
+ * 
+ * @param object $node
+ */
+function mata_hari_node_insert($node) {
+    $log = new mata_hari_log(t('Node'), t('Add'));
+    $log->set_message(t('Add to node, nid: @nid, title: @title', array('@nid' => $node->nid, '@title' => $node->title)));
+    $log->save();
 }
 
-function mata_hari_node_update($node){
-    global $user;
-    // Construction de l'objet info.
-    $info = new stdClass();
-    $info->user = $user->uid;
-    $info->date = time();
-    $info->category = 'Node';
-    $info->action = t('Update');
-    $info->description = t('Delete to node, nid: @nid, title: @title',
-            array('@nid' => $node->vid, '@title' => $node->title)
-            );
-            __mat_hari_save($info);
+/**
+ * Implementes hook_node_update
+ * 
+ * @param object $node
+ */
+function mata_hari_node_update($node) {
+    $log = new mata_hari_log(t('Node'), t('Update'));
+    $log->set_message(t('Update to node, nid: @nid, title: @title', array('@nid' => $node->nid, '@title' => $node->title)));
+    $log->save();
 }
