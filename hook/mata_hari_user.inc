@@ -3,7 +3,6 @@
 /**
  * Implements hook_user_insert
  * 
- * @global object $user
  * @param object $edit
  * @param object $account
  * @param object $category
@@ -20,7 +19,6 @@ function mata_hari_user_insert($edit, $account, $category) {
 /**
  * Implements hook_user_update
  * 
- * @global object $user
  * @param object $edit
  * @param object $account
  * @param object $category
@@ -28,22 +26,14 @@ function mata_hari_user_insert($edit, $account, $category) {
  * Add function to save user update.
  */
 function mata_hari_user_update($edit, $account, $category) {
-    global $user;
-    // Construction de l'objet info.
-    $info = new stdClass();
-    $info->user = $user->uid;
-    $info->date = time();
-    $info->category = 'User';
-    $info->action = t('Update');
-    $info->description = t('Update to user, name: @name, email: @email', array('@name' => $account->name, '@email' => $account->mail)
-    );
-    __mat_hari_save($info);
+    $log = new mata_hari_log(t('User'), t('Update'));
+    $log->set_message(t('Update to user, name: @name, email: @email', array('@name' => $account->name, '@email' => $account->mail)));
+    $log->save();
 }
 
 /**
  * Implements hook_user_delete
  * 
- * @global object $user
  * @param type $edit
  * @param type $account
  * @param type $category
@@ -51,16 +41,7 @@ function mata_hari_user_update($edit, $account, $category) {
  * Add function to save user delete
  */
 function mata_hari_user_delete($edit, $account, $category) {
-    var_dump($edit, $account, $category);
-    exit('probleme setting delete');
-    global $user;
-    // Construction de l'objet info.
-    $info = new stdClass();
-    $info->user = $user->uid;
-    $info->date = time();
-    $info->category = 'User';
-    $info->action = t('Delete');
-    $info->description = t('Delete to user, name: @name, email: @email', array('@name' => $account->name, '@email' => $account->mail)
-    );
-    __mat_hari_save($info);
+    $log = new mata_hari_log(t('User'), t('Delete'));
+    $log->set_message(t('Delete to user, name: @name, email: @email', array('@name' => $account->name, '@email' => $account->mail)));
+    $log->save();
 }
