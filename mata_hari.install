@@ -1,0 +1,77 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the book module.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function mata_hari_install() {
+    
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function mata_hari_uninstall() {
+    drupal_uninstall_schema('metat_hari');
+}
+
+/**
+ * Implements hook_schema
+ * 
+ * @return array
+ * 
+ * for save to entity in db
+ */
+function mata_hari_schema() {
+    $schema = array();
+
+    $schema['mata_hari_info'] = array(
+        'description' => 'The base table for mata hari.',
+        'fields' => array(
+            'id' => array(
+                'description' => 'Primary key of id',
+                'type' => 'serial',
+                'unsigned' => TRUE,
+                'not null' => TRUE,
+            ),
+            'date' => array(
+                'description' => 'The Unix timestamp of the entity cretead.',
+                'type' => 'int',
+                'not null' => TRUE,
+                'default' => 0,
+            ),
+            'user' => array(
+                'description' => 'User include content',
+                'type' => 'int',
+                'not null' => TRUE,
+                'default' => 0,
+            ),
+            'category' => array(
+                'description' => 'Category of log',
+                'type' => 'text',
+                'size' => 'medium',
+                'not null' => TRUE
+            ),
+            'action' => array(
+                'description' => 'User include content',
+                'type' => 'text',
+                'size' => 'medium',
+                'not null' => TRUE
+            ),
+            'description' => array(
+                'description' => 'A description of the item',
+                'type' => 'varchar',
+                'length' => 255,
+                'not null' => TRUE,
+                'default' => '',
+            ),
+        ),
+        'primary key' => array('id'),
+    );
+
+    return $schema;
+}

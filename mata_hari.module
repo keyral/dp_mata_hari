@@ -1,0 +1,83 @@
+<?php
+
+/**
+ * @file
+ * Use to module mata_hari
+ */
+//Class
+require_once ('classes/mata_hari.class.log.php');
+require_once ('classes/mata_hari.class.query.php');
+// Hook
+require_once ('hook/mata_hari_node.inc');
+require_once ('hook/mata_hari_taxonomy.inc');
+require_once ('hook/mata_hari_user.inc');
+require_once ('hook/mata_hari_field.inc');
+require_once ('hook/mata_hari_menu.inc');
+require_once ('hook/mata_hari_field.inc');
+
+/**
+ * Implements hook_menu()
+ * 
+ * return array
+ */
+function mata_hari_menu() {
+    $items = array();
+    $items['admin/config/mata_hari_info'] = array(
+        'title' => 'Mata Hari - Home',
+        'page callback' => 'mata_hari_info_callback_home',
+        'access arguments' => array('view mata_hari_info'),
+        'file' => 'include/mata_hari_callback_home.inc',
+    );
+    $items['admin/config/mata_hari_info/log'] = array(
+        'title' => 'Mata Hari - Log',
+        'page callback' => 'mata_hari_info_callback',
+        'access arguments' => array('view mata_hari_info'),
+        'file' => 'include/mata_hari_callback_log.inc',
+    );
+     $items['admin/config/mata_hari_info/type/%'] = array(
+        'title' => t('Welcome to the Hello World Module'),
+        'page callback' => 'mata_hari_info_callback_type',
+        'page arguments' => array(1),
+        'access arguments' => array('view mata_hari_info'),
+        'file' => 'include/mata_hari_callback_type.inc',
+    );
+    return $items;
+}
+
+/**
+ * Implements hook_permission().
+ * 
+ * return array
+ */
+function mata_hari_permission() {
+    $permissions = array(
+        'view mata_hari_info' => array(
+            'title' => t('View Informaton to mata hari.'),
+        ),
+    );
+    return $permissions;
+}
+
+/**
+ * Implements hook_entity_info
+ * @return array
+ */
+function mata_hari_entity_info() {
+    $info['mata_hari_info'] = array(
+        'label' => t('Mata Hari entity'),
+        'controller class' => 'EntityAPIController',
+        'base table' => 'mata_hari_info',
+        'fieldable' => TRUE,
+        'entity keys' => array(
+            'id' => 'id',
+            'date' => 'date',
+            'user' => 'user',
+            'category' => 'category',
+            'action' => 'action',
+            'description' => 'description',
+        ),
+        'static cache' => TRUE,
+    );
+
+    return $info;
+}
