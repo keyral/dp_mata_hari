@@ -4,6 +4,8 @@
  * @file
  * Use to module mata_hari
  */
+require_once ('include/mata_hari.class.log.php');
+require_once ('include/mata_hari.class.query.php');
 /**
  * Implements hook_menu()
  * 
