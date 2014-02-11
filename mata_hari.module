@@ -4,17 +4,6 @@
  * @file
  * Use to module mata_hari
  */
-//Class
-require_once ('classes/mata_hari.class.log.php');
-require_once ('classes/mata_hari.class.query.php');
-// Hook
-require_once ('hook/mata_hari_node.inc');
-require_once ('hook/mata_hari_taxonomy.inc');
-require_once ('hook/mata_hari_user.inc');
-require_once ('hook/mata_hari_field.inc');
-require_once ('hook/mata_hari_menu.inc');
-require_once ('hook/mata_hari_field.inc');
-
 /**
  * Implements hook_menu()
  * 
