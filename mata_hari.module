@@ -19,13 +19,14 @@ function mata_hari_menu() {
         'access arguments' => array('view mata_hari_info'),
         'file' => 'include/callback/mata_hari_callback_home.inc',
     );
+    //View logs
     $items['admin/config/mata_hari_info/log'] = array(
         'title' => 'Mata Hari - View all Log',
         'page callback' => 'mata_hari_info_callback',
         'access arguments' => array('view mata_hari_info'),
         'file' => 'include/callback/mata_hari_callback_log.inc',
     );
-     $items['admin/config/mata_hari_info/type/%'] = array(
+     $items['admin/config/mata_hari_info/log/type/%'] = array(
         'title' => t('Welcome to the Hello World Module'),
         'page callback' => 'mata_hari_info_callback_type',
         'page arguments' => array(1),
@@ -71,4 +72,46 @@ function mata_hari_entity_info() {
     );
 
     return $info;
+}
+
+
+/**
+ * Add function __mata_hari_info_table
+ * 
+ * @param array $query
+ * @return array
+ * 
+ * Add function to return tabs.
+ */
+function __mata_hari_info_table($query) {
+    $header = array(
+        array('data' => t('id')),
+        array('data' => t('date')),
+        array('data' => t('user')),
+        array('data' => t('category')),
+        array('data' => t('action')),
+        array('data' => t('comment')),
+    );
+
+
+    if (isset($query) && $query != NULL) {
+        foreach ($query as $result) {
+            $user = user_load($result->user);
+            $data['id'] = $result->id;
+            $data['date'] = format_date($result->date, 'date_format_short');
+            $data['user'] = l($user->name, 'user/' . $user->uid);
+            $data['category'] = $result->category;
+            $data['action'] = $result->action;
+            $data['description'] = $result->description;
+            $rows[] = array('data' => $data);
+        }
+    }
+
+    // build the table for the nice output.
+    $build['tablesort_table'] = array(
+        '#theme' => 'table',
+        '#header' => $header,
+        '#rows' => $rows,
+    );
+    return $build;
 }
