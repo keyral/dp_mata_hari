@@ -1,0 +1,10 @@
+name = Mata Hari User
+description = Resquest all information to user.
+;package = 
+dependencies[] = mata_hari
+version = 1.0
+core = 7.x 
+project = "mata_hari_user"
+
+
+

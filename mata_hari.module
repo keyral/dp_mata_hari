@@ -17,20 +17,20 @@ function mata_hari_menu() {
         'title' => 'Mata Hari - Home',
         'page callback' => 'mata_hari_info_callback_home',
         'access arguments' => array('view mata_hari_info'),
-        'file' => 'include/mata_hari_callback_home.inc',
+        'file' => 'include/callback/mata_hari_callback_home.inc',
     );
     $items['admin/config/mata_hari_info/log'] = array(
-        'title' => 'Mata Hari - Log',
+        'title' => 'Mata Hari - View all Log',
         'page callback' => 'mata_hari_info_callback',
         'access arguments' => array('view mata_hari_info'),
-        'file' => 'include/mata_hari_callback_log.inc',
+        'file' => 'include/callback/mata_hari_callback_log.inc',
     );
      $items['admin/config/mata_hari_info/type/%'] = array(
         'title' => t('Welcome to the Hello World Module'),
         'page callback' => 'mata_hari_info_callback_type',
         'page arguments' => array(1),
         'access arguments' => array('view mata_hari_info'),
-        'file' => 'include/mata_hari_callback_type.inc',
+        'file' => 'include/callback/mata_hari_callback_type.inc',
     );
     return $items;
 }
