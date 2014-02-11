@@ -26,7 +26,7 @@ function mata_hari_menu() {
         'access arguments' => array('view mata_hari_info'),
         'file' => 'include/callback/mata_hari_callback_log.inc',
     );
-     $items['admin/config/mata_hari_info/log/type/%'] = array(
+     $items['admin/config/mata_hari_info/type/%'] = array(
         'title' => t('Welcome to the Hello World Module'),
         'page callback' => 'mata_hari_info_callback_type',
         'page arguments' => array(1),
