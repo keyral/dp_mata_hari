@@ -4,8 +4,8 @@
  * @file
  * Use to module mata_hari
  */
-require_once ('include/mata_hari.class.log.php');
-require_once ('include/mata_hari.class.query.php');
+require_once ('include/class/mata_hari.class.log.php');
+require_once ('include/clas/mata_hari.class.query.php');
 
 /**
  * Implements hook_menu()
@@ -18,21 +18,21 @@ function mata_hari_menu() {
         'title' => 'Mata Hari - Home',
         'page callback' => 'mata_hari_info_callback_home',
         'access arguments' => array('view mata_hari_info'),
-        'file' => 'include/callback/mata_hari_callback_home.inc',
+        'file' => 'include/mata_hari_callback.home.inc',
     );
     //Configuration to all module
     $items['admin/config/mata_hari_info/config'] = array(
         'title' => t('Configuration'),
-        'page callback' => 'mata_hari_info_callback',
-        'access arguments' => array('view mata_hari_info'),
-        'file' => 'include/callback/mata_hari.callback.log.inc',
+        'page callback' => 'mata_hari_config',
+        'access arguments' => array('config mata_hari_info'),
+        'file' => 'include/mata_hari.callback.config.inc',
     );
     $items['admin/config/mata_hari_info/type/%'] = array(
-        'title' => t('Welcome to the Hello World Module'),
-        'page callback' => 'mata_hari_info_callback_type',
+        'title' => t('View log'),
+        'page callback' => 'mata_hari_info_view_type',
         'page arguments' => array(1),
         'access arguments' => array('view mata_hari_info'),
-        'file' => 'include/callback/mata_hari_callback_type.inc',
+        'file' => 'include/mata_hari.view.type.inc',
     );
     return $items;
 }
