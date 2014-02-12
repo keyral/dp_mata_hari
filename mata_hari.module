@@ -6,6 +6,7 @@
  */
 require_once ('include/mata_hari.class.log.php');
 require_once ('include/mata_hari.class.query.php');
+
 /**
  * Implements hook_menu()
  * 
@@ -19,14 +20,14 @@ function mata_hari_menu() {
         'access arguments' => array('view mata_hari_info'),
         'file' => 'include/callback/mata_hari_callback_home.inc',
     );
-    //View logs
-    $items['admin/config/mata_hari_info/log'] = array(
-        'title' => 'Mata Hari - View all Log',
+    //Configuration to all module
+    $items['admin/config/mata_hari_info/config'] = array(
+        'title' => t('Configuration'),
         'page callback' => 'mata_hari_info_callback',
         'access arguments' => array('view mata_hari_info'),
-        'file' => 'include/callback/mata_hari_callback_log.inc',
+        'file' => 'include/callback/mata_hari.callback.log.inc',
     );
-     $items['admin/config/mata_hari_info/type/%'] = array(
+    $items['admin/config/mata_hari_info/type/%'] = array(
         'title' => t('Welcome to the Hello World Module'),
         'page callback' => 'mata_hari_info_callback_type',
         'page arguments' => array(1),
@@ -43,8 +44,11 @@ function mata_hari_menu() {
  */
 function mata_hari_permission() {
     $permissions = array(
-        'view mata_hari_info' => array(
+        'view mata_hari' => array(
             'title' => t('View Informaton to mata hari.'),
+        ),
+        'config mata_hari' => array(
+            'title' => t('Config information to mata hari.'),
         ),
     );
     return $permissions;
@@ -72,46 +76,4 @@ function mata_hari_entity_info() {
     );
 
     return $info;
-}
-
-
-/**
- * Add function __mata_hari_info_table
- * 
- * @param array $query
- * @return array
- * 
- * Add function to return tabs.
- */
-function __mata_hari_info_table($query) {
-    $header = array(
-        array('data' => t('id')),
-        array('data' => t('date')),
-        array('data' => t('user')),
-        array('data' => t('category')),
-        array('data' => t('action')),
-        array('data' => t('comment')),
-    );
-
-
-    if (isset($query) && $query != NULL) {
-        foreach ($query as $result) {
-            $user = user_load($result->user);
-            $data['id'] = $result->id;
-            $data['date'] = format_date($result->date, 'date_format_short');
-            $data['user'] = l($user->name, 'user/' . $user->uid);
-            $data['category'] = $result->category;
-            $data['action'] = $result->action;
-            $data['description'] = $result->description;
-            $rows[] = array('data' => $data);
-        }
-    }
-
-    // build the table for the nice output.
-    $build['tablesort_table'] = array(
-        '#theme' => 'table',
-        '#header' => $header,
-        '#rows' => $rows,
-    );
-    return $build;
 }
