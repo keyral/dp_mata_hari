@@ -5,7 +5,7 @@
  * Use to module mata_hari
  */
 require_once ('include/class/mata_hari.class.log.php');
-require_once ('include/clas/mata_hari.class.query.php');
+require_once ('include/class/mata_hari.class.query.php');
 
 /**
  * Implements hook_menu()
@@ -14,26 +14,36 @@ require_once ('include/clas/mata_hari.class.query.php');
  */
 function mata_hari_menu() {
     $items = array();
-    $items['admin/config/mata_hari_info'] = array(
-        'title' => 'Mata Hari - Home',
+    $items['admin/config/mata_hari'] = array(
+        'title' => 'Mata Hari',
         'page callback' => 'mata_hari_info_callback_home',
         'access arguments' => array('view mata_hari_info'),
         'file' => 'include/mata_hari_callback.home.inc',
     );
-    //Configuration to all module
-    $items['admin/config/mata_hari_info/config'] = array(
+    //Request all type for implements items to menu.
+    $query = new mata_hari_query();
+    $result = $query->distinctTypeCategory();
+    if (isset($result)) {
+        foreach ($result as $item) {
+            $items['admin/config/mata_hari/type/' . $item] = array(
+                'title' => t('View log') . ' - ' . $item,
+                'page callback' => 'mata_hari_info_view_type',
+                'page arguments' => array($item),
+                'access arguments' => array('view mata_hari_info'),
+                'file' => 'include/mata_hari.view.type.inc',
+            );
+        }
+    }
+        //Configuration to all module
+    $items['admin/config/mata_hari/config'] = array(
         'title' => t('Configuration'),
         'page callback' => 'mata_hari_config',
         'access arguments' => array('config mata_hari_info'),
         'file' => 'include/mata_hari.callback.config.inc',
     );
-    $items['admin/config/mata_hari_info/type/%'] = array(
-        'title' => t('View log'),
-        'page callback' => 'mata_hari_info_view_type',
-        'page arguments' => array(1),
-        'access arguments' => array('view mata_hari_info'),
-        'file' => 'include/mata_hari.view.type.inc',
-    );
+    
+    
+    
     return $items;
 }
 
