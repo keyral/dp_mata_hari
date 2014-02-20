@@ -1,0 +1,10 @@
+name = Mata Hari - User
+description = Recupération des informations user.
+package = Mata Hari
+dependencies[] = mata_hari
+version = 1.0
+core = 7.x 
+project = "mata_hari_user"
+
+
+

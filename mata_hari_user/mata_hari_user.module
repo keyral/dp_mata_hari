@@ -2,10 +2,8 @@
 
 /**
  * @file
- * Use to module mata_hari
+ * Use to module mata_hari_user
  */
-require_once ('include/class/mata_hari.class.log.php');
-require_once ('include/class/mata_hari.class.query.php');
 
 /**
  * Implements hook_menu()
@@ -14,42 +12,13 @@ require_once ('include/class/mata_hari.class.query.php');
  */
 function mata_hari_menu() {
     $items = array();
-    $items['admin/config/mata_hari'] = array(
-        'title' => 'Mata Hari',
-        'page callback' => 'mata_hari_info_callback_home',
+    $items['admin/config/mata_hari/type/user'] = array(
+        'title' => t('View log - User'),
+        'page callback' => 'mata_hari_info_view_type',
+        'page arguments' => array($item),
         'access arguments' => array('view mata_hari_info'),
-        'file' => 'include/mata_hari_callback.home.inc',
+        'file' => 'include/mata_hari.view.type.inc',
     );
-    //Request all type for implements items to menu.
-    $query = new mata_hari_query();
-    $result = $query->distinctTypeCategory();
-    if (isset($result)) {
-        foreach ($result as $item) {
-            $items['admin/config/mata_hari/type/' . $item] = array(
-                'title' => t('View log') . ' - ' . $item,
-                'page callback' => 'mata_hari_info_view_type',
-                'page arguments' => array($item),
-                'access arguments' => array('view mata_hari_info'),
-                'file' => 'include/mata_hari.view.type.inc',
-            );
-        }
-    }
-    
-    //Callback to return listing de type.
-    $items['admin/config/mata_hari/type'] = array(
-        'title' => t('View all type'),
-        'page callback' => 'mata_hari_view_type',
-        'access arguments' => array('view mata_hari_info'),
-        'file' => 'include/mata_hari.callback.view_type.inc',
-    );
-    //Configuration to all module
-    $items['admin/config/mata_hari/config'] = array(
-        'title' => t('Configuration'),
-        'page callback' => 'mata_hari_config',
-        'access arguments' => array('config mata_hari_info'),
-        'file' => 'include/mata_hari.callback.config.inc',
-    );
-
     return $items;
 }
 
