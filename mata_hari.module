@@ -17,7 +17,7 @@ function mata_hari_menu() {
     $items['admin/config/mata_hari'] = array(
         'title' => 'Mata Hari',
         'page callback' => 'mata_hari_info_callback_home',
-        'access arguments' => array('view mata_hari_info'),
+        'access arguments' => TRUE,
         'file' => 'include/mata_hari_callback.home.inc',
     );
     //Request all type for implements items to menu.
@@ -41,9 +41,7 @@ function mata_hari_menu() {
         'access arguments' => array('config mata_hari_info'),
         'file' => 'include/mata_hari.callback.config.inc',
     );
-    
-    
-    
+
     return $items;
 }
 
@@ -86,4 +84,7 @@ function mata_hari_entity_info() {
     );
 
     return $info;
+}
+function mata_hari_tabs($type){
+    
 }
