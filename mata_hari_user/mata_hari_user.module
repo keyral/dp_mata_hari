@@ -1,100 +1,62 @@
 <?php
 
-/**
- * @file
- * Use to module mata_hari_user
- */
 
 /**
- * Implements hook_menu()
+ * Add form to config module user.
+ */
+ function mata_hari_user_config_form(){
+     
+}
+
+/**
+ * Add function to callback form config.
+ */
+function mata_hari_callback($form, &$form_state){
+    
+}
+//Add all hook user.
+/**
+ * Implements hook_user_insert
  * 
- * return array
- */
-function mata_hari_menu() {
-    $items = array();
-    $items['admin/config/mata_hari/type/user'] = array(
-        'title' => t('View log - User'),
-        'page callback' => 'mata_hari_info_view_type',
-        'page arguments' => array($item),
-        'access arguments' => array('view mata_hari_info'),
-        'file' => 'include/mata_hari.view.type.inc',
-    );
-    return $items;
-}
-
-/**
- * Implements hook_permission().
+ * @param object $edit
+ * @param object $account
+ * @param object $category
  * 
- * return array
+ * Create log in user insert.
  */
-function mata_hari_permission() {
-    $permissions = array(
-        'view mata_hari' => array(
-            'title' => t('View Informaton to mata hari.'),
-        ),
-        'config mata_hari' => array(
-            'title' => t('Config information to mata hari.'),
-        ),
-    );
-    return $permissions;
+function mata_hari_user_user_insert($edit, $account, $category) {
+
+    $log = new mata_hari_log(t('User'), t('Add'));
+    $log->set_message(t('Add to user, name: @name, email: @email', array('@name' => $account->name, '@email' => $account->mail)));
+    $log->save();
 }
 
 /**
- * Implements hook_entity_info
- * @return array
+ * Implements hook_user_update
+ * 
+ * @param object $edit
+ * @param object $account
+ * @param object $category
+ * 
+ * Add function to save user update.
  */
-function mata_hari_entity_info() {
-    $info['mata_hari_info'] = array(
-        'label' => t('Mata Hari entity'),
-        'controller class' => 'EntityAPIController',
-        'base table' => 'mata_hari_info',
-        'fieldable' => TRUE,
-        'entity keys' => array(
-            'id' => 'id',
-            'date' => 'date',
-            'user' => 'user',
-            'category' => 'category',
-            'action' => 'action',
-            'description' => 'description',
-        ),
-        'static cache' => TRUE,
-    );
-
-    return $info;
+function mata_hari_user_user_update($edit, $account, $category) {
+    $log = new mata_hari_log(t('User'), t('Update'));
+    $log->set_message(t('Update to user, name: @name, email: @email', array('@name' => $account->name, '@email' => $account->mail)));
+    $log->save();
 }
 
-function mata_hari_tabs($results) {
-    $header = array(
-        array('data' => t('id')),
-        array('data' => t('date')),
-        array('data' => t('user')),
-        array('data' => t('category')),
-        array('data' => t('action')),
-        array('data' => t('comment')),
-    );
-
-
-    if (isset($results) && $results != NULL) {
-        foreach ($results as $result) {
-            $user = user_load($result->user);
-            $data['id'] = $result->id;
-            $data['date'] = format_date($result->date, 'date_format_short');
-            $data['user'] = l($user->name, 'user/' . $user->uid);
-            $data['category'] = $result->category;
-            $data['action'] = $result->action;
-            $data['description'] = $result->description;
-            $rows[] = array('data' => $data);
-        }
-
-
-        // build the table for the nice output.
-        $build['tablesort_table'] = array(
-            '#theme' => 'table',
-            '#header' => $header,
-            '#rows' => $rows,
-        );
-        return $build;
-    } else {
-        return FALSE;
-    }
+/**
+ * Implements hook_user_delete
+ * 
+ * @param type $edit
+ * @param type $account
+ * @param type $category
+ * 
+ * Add function to save user delete
+ */
+function mata_hari_user_user_delete($edit, $account, $category) {
+    $log = new mata_hari_log(t('User'), t('Delete'));
+    $log->set_message(t('Delete to user, name: @name, email: @email', array('@name' => $account->name, '@email' => $account->mail)));
+    $log->save();
 }
