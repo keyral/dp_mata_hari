@@ -1,19 +1,29 @@
 <?php
 
-
 /**
  * Add form to config module user.
  */
- function mata_hari_user_config_form(){
-     
+function mata_hari_user_config_form() {
+    $form = array();
+    $form ['submit'] = array(
+        '#type' => 'submit',
+        '#ajax' => array(
+            'callback' => 'mata_hari_callback_user',
+            'wrapper' => 'box',
+        ),
+        '#value' => t('Envoyer '),
+    );
+    return $form;
 }
 
 /**
  * Add function to callback form config.
  */
-function mata_hari_callback($form, &$form_state){
+function mata_hari_callback_user($form, &$form_state) {
     
 }
+
+
 //Add all hook user.
 /**
  * Implements hook_user_insert

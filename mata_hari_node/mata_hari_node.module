@@ -1,4 +1,26 @@
 <?php
+/**
+ * Add form to config module user.
+ */
+function mata_hari_node_config_form() {
+    $form = array();
+    $form ['submit'] = array(
+        '#type' => 'submit',
+        '#ajax' => array(
+            'callback' => 'mata_hari_callback_node',
+            'wrapper' => 'box',
+        ),
+        '#value' => t('Envoyer '),
+    );
+    return $form;
+}
+
+/**
+ * Add function to callback form config.
+ */
+function mata_hari_callback_node($form, &$form_state) {
+    
+}
 
 /**
  *  Implements hook_node_delete
