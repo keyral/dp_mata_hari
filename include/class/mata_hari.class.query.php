@@ -45,9 +45,9 @@ class mata_hari_query extends EntityFieldQuery {
         $this->entityCondition('entity_type', 'mata_hari_info');
         $result = $this->execute();
         if (isset($result['mata_hari_info'])) {
-            $return = TRUE;
+            return TRUE;
         }
-        return $return;
+        return FALSE;   
     }
 
     /**
@@ -56,7 +56,7 @@ class mata_hari_query extends EntityFieldQuery {
      * To delete all entity.
      */
     public function deleteAll() {
-        if ($this->predelete() == TRUE) {
+        if ($this->predelete() === TRUE) {
             entity_delete_multiple('mata_hari_info', array_keys($this->queryAll()));
             return TRUE;
         } else {
